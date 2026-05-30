@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
 import { colors } from '@/src/constants/theme';
+import { SandboxProfileProvider } from '@/src/context/SandboxProfileContext';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -46,18 +47,20 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <SafeAreaProvider>
-      <StatusBar style="dark" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: colors.background },
-        }}
-      >
-        <Stack.Screen name="onboarding" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="repayment" />
-        <Stack.Screen name="disclosures" />
-      </Stack>
+      <SandboxProfileProvider>
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: colors.background },
+          }}
+        >
+          <Stack.Screen name="onboarding" />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="repayment" />
+          <Stack.Screen name="disclosures" />
+        </Stack>
+      </SandboxProfileProvider>
     </SafeAreaProvider>
   );
 }

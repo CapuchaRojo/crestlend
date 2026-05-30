@@ -25,6 +25,7 @@ CrestLend provides a polished Android-first mobile sandbox where users can brows
 ## Features
 
 - Mobile-first onboarding with clear sandbox disclosure
+- Local sandbox borrower onboarding for goal, amount, income, obligations, payment comfort, employment category, and credit education comfort
 - Home dashboard for synthetic borrower Maya
 - Synthetic loan marketplace
 - 2-3 offer comparison with principal, APR, term, monthly payment, total repayment, total interest, payment burden, funding speed, readiness, pros, and cons
@@ -35,6 +36,7 @@ CrestLend provides a polished Android-first mobile sandbox where users can brows
 - Prominent CreditCrest AI education links in Help, loan comparison, application review, and repayment schedule
 - Compliance/disclosure screen
 - Future partner-ready capability surfaces for lender APIs, identity verification, secure document upload, open banking, bureau soft pulls, and payment processing
+- Placeholder app icon, adaptive icon, favicon, and splash artwork for early Google Play readiness
 - Deterministic local lending engine in `src/lib/lendingEngine.ts`
 - Unit tests for core calculations and status logic
 
@@ -64,6 +66,47 @@ Android-first commands:
 ```sh
 npm run android
 ```
+
+## Sandbox Borrower Onboarding
+
+CrestLend starts with a production-style sandbox borrower setup flow. Users can enter non-sensitive local values for:
+
+- Borrowing goal
+- Desired loan amount
+- Estimated monthly income
+- Existing monthly obligations
+- Preferred monthly payment comfort
+- Employment category
+- Credit education comfort level
+
+The flow includes:
+
+- Continue to CrestLend
+- Learn first with CreditCrest AI
+- Skip and use Maya demo profile
+- Reset demo profile
+- Stored locally on this device/browser only
+
+The app does not ask for SSNs, full dates of birth, real bank credentials, credit bureau credentials, identity documents, uploaded files, or account numbers.
+
+## Local Sandbox Profile Storage
+
+Sandbox borrower profiles are stored locally with `@react-native-async-storage/async-storage`. The stored profile is used by the Home dashboard, loan comparison, simulated application defaults, repayment estimates, and status context. There is no auth, backend persistence, lender submission, bureau connection, bank connection, or document upload in this build.
+
+Resetting the demo profile clears local storage and restores Maya.
+
+## App Icon And Splash Placeholders
+
+The app includes simple placeholder branding assets:
+
+- `assets/images/icon.png`
+- `assets/images/splash-icon.png`
+- `assets/images/android-icon-foreground.png`
+- `assets/images/android-icon-background.png`
+- `assets/images/android-icon-monochrome.png`
+- `assets/images/favicon.png`
+
+These assets are configured in `app.json` with app name `CrestLend`, Android package `com.creditcrest.crestlend`, Expo icon path, adaptive icon paths, and splash image/background settings. They are placeholders for readiness work and should be replaced by production brand assets before store submission.
 
 ## Sandbox Mode Explanation
 

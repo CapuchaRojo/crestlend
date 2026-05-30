@@ -23,16 +23,31 @@ export type LoanPurpose =
 
 export type EmploymentType = 'W-2 employee' | 'Contractor' | 'Student' | 'Not listed';
 
+export type BorrowingGoal =
+  | 'Build credit'
+  | 'Cover emergency cost'
+  | 'Finance purchase'
+  | 'Repair vehicle'
+  | 'Compare options';
+
+export type CreditEducationComfort = 'Just starting' | 'Somewhat familiar' | 'Confident';
+
 export interface BorrowerProfile {
   id: string;
   name: string;
   borrowerStatus: string;
   readiness: ReadinessLevel;
+  borrowingGoal: BorrowingGoal;
+  desiredLoanAmount: number;
   estimatedMonthlyIncome: number;
   currentMonthlyObligations: number;
+  preferredMonthlyPayment: number;
+  employmentCategory: EmploymentType;
+  creditEducationComfort: CreditEducationComfort;
   currentCreditUtilization: number;
   recentInquiries: number;
   paymentHistoryCaution: string;
+  profileSource: 'maya-demo' | 'custom-sandbox';
 }
 
 export interface LoanOffer {

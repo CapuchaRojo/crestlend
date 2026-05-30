@@ -15,7 +15,8 @@ import {
   ProgressDots,
   SectionHeader,
 } from '@/src/components/ui';
-import { creditCrestLinks, loanOffers, mayaProfile } from '@/src/data/demoData';
+import { creditCrestLinks, loanOffers } from '@/src/data/demoData';
+import { useSandboxProfile } from '@/src/context/SandboxProfileContext';
 import { colors, radii, spacing } from '@/src/constants/theme';
 import {
   simulatedApplicationSchema,
@@ -28,8 +29,9 @@ import {
   calculateTotalRepayment,
   estimateReadiness,
 } from '@/src/lib/lendingEngine';
+import { mapBorrowingGoalToOfferId, mapBorrowingGoalToPurpose } from '@/src/lib/sandboxProfile';
 import { formatCurrency, formatPercent } from '@/src/lib/formatters';
-import type { EmploymentType, LoanPurpose } from '@/src/types/lending';
+import type { BorrowerProfile, EmploymentType, LoanPurpose } from '@/src/types/lending';
 
 const purposeDefaults: Record<
   LoanPurpose,
@@ -79,17 +81,18 @@ const stepTitles = [
 ];
 
 export default function ApplyScreen() {
+  const { profile } = useSandboxProfile();
   const [step, setStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [draft, setDraft] = useState<SimulatedApplicationDraft>({
-    purpose: 'Auto repair',
-    requestedAmount: 1500,
-    applicantName: 'Maya',
+    purpose: mapBorrowingGoalToPurpose(profile.borrowingGoal),
+    requestedAmount: profile.desiredLoanAmount,
+    applicantName: profile.name,
     profileMode: 'Synthetic demo profile',
-    monthlyIncome: mayaProfile.estimatedMonthlyIncome,
-    employmentType: 'W-2 employee',
-    selectedOfferId: 'auto-repair',
+    monthlyIncome: profile.estimatedMonthlyIncome,
+    employmentType: profile.employmentCategory,
+    selectedOfferId: mapBorrowingGoalToOfferId(profile.borrowingGoal),
     demoConsentAccepted: false,
   });
 
@@ -105,7 +108,7 @@ export default function ApplyScreen() {
   const totalRepayment = calculateTotalRepayment(monthlyPayment, selectedOffer.months);
   const totalInterest = calculateTotalInterest(totalRepayment, selectedOffer.principal);
   const readiness = estimateReadiness(
-    { ...mayaProfile, estimatedMonthlyIncome: draft.monthlyIncome },
+    { ...profile, estimatedMonthlyIncome: draft.monthlyIncome },
     selectedOffer
   );
 
@@ -196,7 +199,7 @@ export default function ApplyScreen() {
           {step === 0 ? (
             <StepPurpose draft={draft} setPurpose={setPurpose} setDraft={setDraft} />
           ) : null}
-          {step === 1 ? <StepProfile /> : null}
+          {step === 1 ? <StepProfile profile={profile} /> : null}
           {step === 2 ? <StepIncome draft={draft} setDraft={setDraft} /> : null}
           {step === 3 ? (
             <StepTerms
@@ -206,6 +209,7 @@ export default function ApplyScreen() {
               totalRepayment={totalRepayment}
               totalInterest={totalInterest}
               readinessLevel={readiness.level}
+              preferredMonthlyPayment={profile.preferredMonthlyPayment}
             />
           ) : null}
           {step === 4 ? (
@@ -218,6 +222,7 @@ export default function ApplyScreen() {
               monthlyPayment={monthlyPayment}
               totalRepayment={totalRepayment}
               readinessLevel={readiness.level}
+              preferredMonthlyPayment={profile.preferredMonthlyPayment}
               onSubmit={submitApplication}
             />
           ) : null}
@@ -296,7 +301,7 @@ function StepPurpose({
   );
 }
 
-function StepProfile() {
+function StepProfile({ profile }: { profile: BorrowerProfile }) {
   return (
     <View style={styles.stepWrap}>
       <SectionHeader
@@ -304,11 +309,12 @@ function StepProfile() {
         caption="The sandbox preserves the synthetic Maya profile and avoids real identity fields."
       />
       <Card accent="primary">
-        <DetailRow label="Applicant" value={mayaProfile.name} />
-        <DetailRow label="Borrower status" value={mayaProfile.borrowerStatus} />
-        <DetailRow label="Readiness" value={mayaProfile.readiness} />
-        <DetailRow label="Credit utilization" value={`${mayaProfile.currentCreditUtilization}%`} />
-        <DetailRow label="Payment history note" value={mayaProfile.paymentHistoryCaution} />
+        <DetailRow label="Applicant" value={profile.name} />
+        <DetailRow label="Borrower status" value={profile.borrowerStatus} />
+        <DetailRow label="Borrowing goal" value={profile.borrowingGoal} />
+        <DetailRow label="Desired amount" value={formatCurrency(profile.desiredLoanAmount)} />
+        <DetailRow label="Comfort payment" value={formatCurrency(profile.preferredMonthlyPayment)} />
+        <DetailRow label="Education comfort" value={profile.creditEducationComfort} />
       </Card>
       <Card accent="amber">
         <Text style={styles.disclosureText}>
@@ -370,6 +376,7 @@ function StepTerms({
   totalRepayment,
   totalInterest,
   readinessLevel,
+  preferredMonthlyPayment,
 }: {
   selectedOfferId: string;
   setDraft: Dispatch<SetStateAction<SimulatedApplicationDraft>>;
@@ -377,6 +384,7 @@ function StepTerms({
   totalRepayment: number;
   totalInterest: number;
   readinessLevel: string;
+  preferredMonthlyPayment: number;
 }) {
   const selectedOffer = loanOffers.find((offer) => offer.id === selectedOfferId) ?? loanOffers[0];
 
@@ -405,6 +413,7 @@ function StepTerms({
         <DetailRow label="Estimated monthly payment" value={formatCurrency(monthlyPayment)} />
         <DetailRow label="Total repayment" value={formatCurrency(totalRepayment)} />
         <DetailRow label="Total interest" value={formatCurrency(totalInterest)} />
+        <DetailRow label="Payment comfort" value={formatCurrency(preferredMonthlyPayment)} />
         <DetailRow label="Readiness" value={readinessLevel} />
       </Card>
     </View>
@@ -462,6 +471,7 @@ function StepSubmit({
   monthlyPayment,
   totalRepayment,
   readinessLevel,
+  preferredMonthlyPayment,
   onSubmit,
 }: {
   draft: SimulatedApplicationDraft;
@@ -469,6 +479,7 @@ function StepSubmit({
   monthlyPayment: number;
   totalRepayment: number;
   readinessLevel: string;
+  preferredMonthlyPayment: number;
   onSubmit: () => void;
 }) {
   return (
@@ -483,6 +494,7 @@ function StepSubmit({
         <DetailRow label="Requested amount" value={formatCurrency(draft.requestedAmount)} />
         <DetailRow label="Selected offer" value={offerName} />
         <DetailRow label="Estimated monthly" value={formatCurrency(monthlyPayment)} />
+        <DetailRow label="Payment comfort" value={formatCurrency(preferredMonthlyPayment)} />
         <DetailRow label="Total repayment" value={formatCurrency(totalRepayment)} />
         <DetailRow label="Readiness" value={readinessLevel} />
       </Card>

@@ -11,10 +11,12 @@ import {
   loanOffers,
 } from '@/src/data/demoData';
 import { colors, spacing } from '@/src/constants/theme';
+import { useSandboxProfile } from '@/src/context/SandboxProfileContext';
 import { formatCurrency } from '@/src/lib/formatters';
 import { generateStatusTimeline } from '@/src/lib/lendingEngine';
 
 export default function StatusScreen() {
+  const { profile } = useSandboxProfile();
   const timeline = generateStatusTimeline(exampleApplication);
   const offer = loanOffers.find((item) => item.id === exampleApplication.selectedOfferId);
 
@@ -33,13 +35,14 @@ export default function StatusScreen() {
           </View>
           <Badge label="Documents pending" variant="warning" />
         </View>
-        <DetailRow label="Applicant" value={exampleApplication.applicantName} />
-        <DetailRow label="Purpose" value={exampleApplication.purpose} />
-        <DetailRow label="Requested amount" value={formatCurrency(exampleApplication.requestedAmount)} />
+        <DetailRow label="Applicant" value={profile.name} />
+        <DetailRow label="Borrowing goal" value={profile.borrowingGoal} />
+        <DetailRow label="Requested amount" value={formatCurrency(profile.desiredLoanAmount)} />
         <DetailRow label="Synthetic offer" value={offer?.name ?? 'Synthetic offer'} />
         <Text style={styles.summaryCopy}>
           Statuses are local and educational. They do not represent underwriting, approval, denial,
-          funding, or servicing activity.
+          funding, or servicing activity. Profile details are stored locally on this device/browser
+          only.
         </Text>
       </Card>
 

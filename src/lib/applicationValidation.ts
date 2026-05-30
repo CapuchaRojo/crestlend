@@ -21,7 +21,10 @@ export const simulatedApplicationSchema = z.object({
     .number()
     .min(100, 'Choose a demo amount of at least $100.')
     .max(3000, 'Demo applications are capped at $3,000.'),
-  applicantName: z.literal('Maya'),
+  applicantName: z
+    .string()
+    .min(1, 'Use a sandbox borrower label.')
+    .max(40, 'Use a short sandbox borrower label.'),
   profileMode: z.literal('Synthetic demo profile'),
   monthlyIncome: z.coerce
     .number()

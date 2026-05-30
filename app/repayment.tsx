@@ -15,15 +15,19 @@ import {
 } from '@/src/components/ui';
 import { creditCrestLinks, loanOffers } from '@/src/data/demoData';
 import { colors, radii, spacing } from '@/src/constants/theme';
+import { useSandboxProfile } from '@/src/context/SandboxProfileContext';
 import {
+  calculatePaymentBurden,
   calculateMonthlyPayment,
   calculateTotalInterest,
   calculateTotalRepayment,
+  classifyPaymentBurden,
   generateRepaymentSchedule,
 } from '@/src/lib/lendingEngine';
-import { formatCurrency, formatPercent } from '@/src/lib/formatters';
+import { formatBurden, formatCurrency, formatPercent } from '@/src/lib/formatters';
 
 export default function RepaymentScreen() {
+  const { profile } = useSandboxProfile();
   const { offerId } = useLocalSearchParams<{ offerId?: string }>();
   const [selectedOfferId, setSelectedOfferId] = useState(offerId ?? 'personal-starter');
 
@@ -38,6 +42,7 @@ export default function RepaymentScreen() {
   );
   const totalRepayment = calculateTotalRepayment(monthlyPayment, selectedOffer.months);
   const totalInterest = calculateTotalInterest(totalRepayment, selectedOffer.principal);
+  const paymentBurden = calculatePaymentBurden(monthlyPayment, profile.estimatedMonthlyIncome);
   const schedule = generateRepaymentSchedule(selectedOffer, '2026-06-15');
 
   return (
@@ -92,6 +97,9 @@ export default function RepaymentScreen() {
           <MetricTile label="Total interest" value={formatCurrency(totalInterest)} />
           <MetricTile label="Term" value={`${selectedOffer.months} months`} />
         </View>
+        <DetailRow label="Payment burden" value={`${formatBurden(paymentBurden)} - ${classifyPaymentBurden(paymentBurden)}`} />
+        <DetailRow label="Comfort payment" value={formatCurrency(profile.preferredMonthlyPayment)} />
+        <DetailRow label="Profile storage" value="This device/browser only" />
       </Card>
 
       <ExternalLinkCard

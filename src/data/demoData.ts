@@ -51,11 +51,17 @@ export const mayaProfile: BorrowerProfile = {
   name: 'Maya',
   borrowerStatus: 'Demo profile',
   readiness: 'Needs caution',
+  borrowingGoal: 'Repair vehicle',
+  desiredLoanAmount: 1500,
   estimatedMonthlyIncome: 2400,
   currentMonthlyObligations: 430,
+  preferredMonthlyPayment: 140,
+  employmentCategory: 'W-2 employee',
+  creditEducationComfort: 'Somewhat familiar',
   currentCreditUtilization: 49,
   recentInquiries: 1,
   paymentHistoryCaution: 'One late payment 10 months ago',
+  profileSource: 'maya-demo',
 };
 
 export const loanOffers: LoanOffer[] = [

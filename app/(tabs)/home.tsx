@@ -4,11 +4,14 @@ import { Linking, StyleSheet, Text, View } from 'react-native';
 
 import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import { ActionButton, AppScreen, Badge, Card, ExternalLinkCard, MetricTile, SectionHeader } from '@/src/components/ui';
-import { creditCrestLinks, exampleApplication, mayaProfile, productRelationship } from '@/src/data/demoData';
+import { creditCrestLinks, exampleApplication, productRelationship } from '@/src/data/demoData';
 import { colors, radii, spacing } from '@/src/constants/theme';
+import { useSandboxProfile } from '@/src/context/SandboxProfileContext';
 import { formatCurrency } from '@/src/lib/formatters';
 
 export default function HomeScreen() {
+  const { profile, resetProfile } = useSandboxProfile();
+
   return (
     <AppScreen
       eyebrow="CrestLend"
@@ -29,27 +32,36 @@ export default function HomeScreen() {
             <Text style={styles.avatarText}>M</Text>
           </View>
           <View style={styles.profileCopy}>
-            <Text style={styles.profileName}>{mayaProfile.name}</Text>
-            <Text style={styles.profileStatus}>{mayaProfile.borrowerStatus}</Text>
+            <Text style={styles.profileName}>{profile.name}</Text>
+            <Text style={styles.profileStatus}>{profile.borrowerStatus}</Text>
           </View>
-          <Badge label={mayaProfile.readiness} variant="warning" />
+          <Badge label={profile.readiness} variant="warning" />
         </View>
 
         <View style={styles.metricRow}>
-          <MetricTile label="Estimated income" value={formatCurrency(mayaProfile.estimatedMonthlyIncome)} />
-          <MetricTile label="Obligations" value={formatCurrency(mayaProfile.currentMonthlyObligations)} />
+          <MetricTile label="Estimated income" value={formatCurrency(profile.estimatedMonthlyIncome)} />
+          <MetricTile label="Obligations" value={formatCurrency(profile.currentMonthlyObligations)} />
         </View>
         <View style={styles.metricRow}>
-          <MetricTile label="Utilization" value={`${mayaProfile.currentCreditUtilization}%`} tone="warning" />
-          <MetricTile label="Recent inquiries" value={`${mayaProfile.recentInquiries}`} />
+          <MetricTile label="Desired amount" value={formatCurrency(profile.desiredLoanAmount)} />
+          <MetricTile label="Comfort payment" value={formatCurrency(profile.preferredMonthlyPayment)} />
         </View>
 
         <View style={styles.notice}>
           <MaterialCommunityIcons name="shield-check-outline" size={19} color={colors.primaryDark} />
           <Text style={styles.noticeText}>
-            CrestLend does not collect SSNs, bank logins, bureau credentials, or real documents.
+            Stored locally on this device/browser only. CrestLend does not collect SSNs, bank
+            logins, bureau credentials, or real documents.
           </Text>
         </View>
+        <ActionButton
+          label="Reset demo profile"
+          icon="refresh"
+          variant="ghost"
+          onPress={() => {
+            void resetProfile();
+          }}
+        />
       </Card>
 
       <SectionHeader title="Dashboard" caption="Synthetic account state for the demo borrower." />
@@ -60,8 +72,8 @@ export default function HomeScreen() {
         </View>
         <Text style={styles.statusTitle}>{exampleApplication.purpose}</Text>
         <Text style={styles.statusBody}>
-          Maya has one sandbox application in document-pending status. This is not a real approval,
-          denial, or lender review.
+          {profile.name} has one sandbox application in document-pending status. This is not a real
+          approval, denial, or lender review.
         </Text>
         <ActionButton
           label="View status tracker"

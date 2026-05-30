@@ -6,11 +6,13 @@ import { ComparisonPanel } from '@/src/components/ComparisonPanel';
 import { LoanCard } from '@/src/components/LoanCard';
 import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import { AppScreen, Badge, Card, SectionHeader } from '@/src/components/ui';
-import { loanOffers, mayaProfile } from '@/src/data/demoData';
+import { loanOffers } from '@/src/data/demoData';
 import { colors, spacing } from '@/src/constants/theme';
+import { useSandboxProfile } from '@/src/context/SandboxProfileContext';
 import { compareLoanOffers } from '@/src/lib/lendingEngine';
 
 export default function LoanMarketplaceScreen() {
+  const { profile } = useSandboxProfile();
   const [selectedOfferIds, setSelectedOfferIds] = useState<string[]>([
     'personal-starter',
     'credit-builder',
@@ -21,8 +23,8 @@ export default function LoanMarketplaceScreen() {
     [selectedOfferIds]
   );
   const comparisonResults = useMemo(
-    () => compareLoanOffers(selectedOffers, mayaProfile),
-    [selectedOffers]
+    () => compareLoanOffers(selectedOffers, profile),
+    [profile, selectedOffers]
   );
 
   function toggleOffer(offerId: string) {
@@ -52,6 +54,13 @@ export default function LoanMarketplaceScreen() {
           These are not real lender offers. CrestLend does not guarantee approval, deny users, or
           match borrowers with lenders in this sandbox. Future live offers would require licensed
           lender partners and jurisdiction-specific compliance review.
+        </Text>
+      </Card>
+      <Card accent="blue">
+        <Text style={styles.disclosureTitle}>Using {profile.borrowerStatus.toLowerCase()}</Text>
+        <Text style={styles.disclosureText}>
+          Comparisons use the local sandbox income, obligations, desired amount, and payment
+          comfort for {profile.name}. Stored locally on this device/browser only.
         </Text>
       </Card>
 

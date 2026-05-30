@@ -7,6 +7,11 @@
     "icon": "./assets/images/icon.png",
     "scheme": "crestlend",
     "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F5F8FA"
+    },
     "ios": {
       "supportsTablet": true
     },
