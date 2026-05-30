@@ -131,3 +131,7 @@ Policy references:
 - Google Play Financial features declaration: https://support.google.com/googleplay/android-developer/answer/13849271
 
 For the current demo, no paid APIs or lender integrations are required.
+
+## Screenshots ##
+
+<img width="2820" height="1614" alt="Screenshot_30-5-2026_174130_localhost" src="https://github.com/user-attachments/assets/241183db-02b6-4510-9a82-996dfedc50e5" />
