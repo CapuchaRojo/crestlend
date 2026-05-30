@@ -2,6 +2,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import {
   ActionButton,
   AppScreen,
@@ -42,8 +43,8 @@ export default function RepaymentScreen() {
   return (
     <AppScreen
       eyebrow="Repayment Schedule"
-      title="See the payment path."
-      subtitle="Review monthly due dates, principal, interest, and remaining balance for a synthetic loan."
+      title="Manage repayment readiness."
+      subtitle="Review the payment path for a synthetic loan before any future partner servicing integration."
       rightSlot={<Badge label="Estimate only" variant="demo" />}
     >
       <ActionButton label="Back" icon="arrow-left" variant="ghost" onPress={() => router.back()} />
@@ -93,6 +94,13 @@ export default function RepaymentScreen() {
         </View>
       </Card>
 
+      <ExternalLinkCard
+        title="Learn with CreditCrest AI"
+        description="Understand monthly payment, APR, and payment burden before reviewing the schedule."
+        url={creditCrestLinks.calculatorHub}
+        icon="school-outline"
+      />
+
       <SectionHeader
         title="Schedule"
         caption="Due dates begin June 15, 2026 for demo consistency."
@@ -126,9 +134,10 @@ export default function RepaymentScreen() {
           CrestLend does not predict official score changes.
         </Text>
       </Card>
+      <PartnerReadinessCard />
       <ExternalLinkCard
-        title="Learn payment impact in CreditCrest AI"
-        description="Open calculators and education before deciding what payment feels sustainable."
+        title="Open CreditCrest AI Calculator Hub"
+        description="Go deeper on payment impact and sustainability concepts."
         url={creditCrestLinks.calculatorHub}
         icon="calculator-variant-outline"
       />

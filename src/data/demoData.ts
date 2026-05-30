@@ -12,6 +12,40 @@ export const creditCrestLinks = {
   methodology: 'https://creditcrest-ai.vercel.app/methodology',
 };
 
+export const productRelationship = {
+  crestlend:
+    'CrestLend helps users compare, organize, and manage lending journeys in a sandbox environment.',
+  creditCrest:
+    'CreditCrest AI helps users understand the financial concepts behind those lending decisions.',
+};
+
+export const futurePartnerCapabilities = [
+  {
+    title: 'Licensed lender partner API',
+    description: 'Future integration surface for eligible partner offers and status updates.',
+  },
+  {
+    title: 'Identity verification',
+    description: 'Future compliant KYC/KYB flow after licensing and vendor review.',
+  },
+  {
+    title: 'Secure document upload',
+    description: 'Future encrypted document intake with retention, access, and audit controls.',
+  },
+  {
+    title: 'Open banking',
+    description: 'Future user-permissioned cash-flow data connection through a vetted provider.',
+  },
+  {
+    title: 'Credit bureau soft pull',
+    description: 'Future permissible-purpose credit review through a compliant bureau partner.',
+  },
+  {
+    title: 'Payment processor',
+    description: 'Future repayment and autopay rails through a licensed payment partner.',
+  },
+];
+
 export const mayaProfile: BorrowerProfile = {
   id: 'maya-demo',
   name: 'Maya',
@@ -154,30 +188,30 @@ export const exampleApplication: LoanApplication = {
 export const documentRequirements = [
   {
     title: 'Identity verification',
-    description: 'Future production flow may verify identity. Demo mode collects no IDs.',
+    description: 'Future partner-ready identity verification. Demo mode collects no IDs.',
   },
   {
     title: 'Proof of income',
-    description: 'Educational checklist only. Do not upload pay stubs or tax documents.',
+    description: 'Future secure document upload or verified income data. Do not upload real records.',
   },
   {
     title: 'Address verification',
-    description: 'Shows where address proof would be reviewed after compliance setup.',
+    description: 'Future compliance-controlled address review after vendor and policy setup.',
   },
   {
     title: 'Bank account verification',
-    description: 'No bank credentials, account numbers, or open banking are connected.',
+    description: 'Future open banking connection. No bank credentials or account numbers are collected.',
   },
   {
     title: 'Credit review',
-    description: 'No credit bureau credentials or real credit pull happen in this demo.',
+    description: 'Future credit bureau soft pull through a compliant partner. No real credit pull happens.',
   },
 ];
 
 export const disclosureItems: DisclosureItem[] = [
   {
     title: 'CrestLend demo mode disclosure',
-    body: 'CrestLend is a sandbox experience for product demonstration and education.',
+    body: 'CrestLend is a production-oriented sandbox for comparing and managing lending journeys without live lending activity.',
   },
   {
     title: 'Synthetic offers only',
@@ -197,7 +231,7 @@ export const disclosureItems: DisclosureItem[] = [
   },
   {
     title: 'Future compliance requirements',
-    body: 'A production version would require licensing analysis, partner compliance, APR disclosures, a privacy policy, security controls, and monitoring.',
+    body: 'A production version would require licensing analysis, partner compliance, APR disclosures, a privacy policy, security controls, monitoring, and partner/vendor governance.',
   },
 ];
 

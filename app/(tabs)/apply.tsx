@@ -4,16 +4,18 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import {
   ActionButton,
   AppScreen,
   Badge,
   Card,
   DetailRow,
+  ExternalLinkCard,
   ProgressDots,
   SectionHeader,
 } from '@/src/components/ui';
-import { loanOffers, mayaProfile } from '@/src/data/demoData';
+import { creditCrestLinks, loanOffers, mayaProfile } from '@/src/data/demoData';
 import { colors, radii, spacing } from '@/src/constants/theme';
 import {
   simulatedApplicationSchema,
@@ -165,8 +167,8 @@ export default function ApplyScreen() {
   return (
     <AppScreen
       eyebrow="Simulated Application"
-      title="Apply in Demo Mode"
-      subtitle="A step-by-step sandbox flow using Maya's synthetic profile. No sensitive identifiers are collected."
+      title="Prepare a lending journey."
+      subtitle="A production-style application workspace using Maya's synthetic profile. No sensitive identifiers are collected."
       rightSlot={<Badge label={`Step ${step + 1}/6`} variant="demo" />}
     >
       <Card>
@@ -241,6 +243,7 @@ export default function ApplyScreen() {
               />
             ) : null}
           </View>
+          <PartnerReadinessCard />
         </>
       )}
     </AppScreen>
@@ -298,7 +301,7 @@ function StepProfile() {
     <View style={styles.stepWrap}>
       <SectionHeader
         title="Basic profile"
-        caption="The MVP preserves the synthetic Maya profile and avoids real identity fields."
+        caption="The sandbox preserves the synthetic Maya profile and avoids real identity fields."
       />
       <Card accent="primary">
         <DetailRow label="Applicant" value={mayaProfile.name} />
@@ -381,7 +384,7 @@ function StepTerms({
     <View style={styles.stepWrap}>
       <SectionHeader
         title="Review estimated terms"
-        caption="Choose a synthetic offer and inspect local payment estimates."
+        caption="Choose a synthetic offer and inspect production-style local payment estimates."
       />
       <View style={styles.optionList}>
         {loanOffers.map((offer) => (
@@ -472,7 +475,7 @@ function StepSubmit({
     <View style={styles.stepWrap}>
       <SectionHeader
         title="Submit simulated application"
-        caption="Review the sandbox summary before generating a local demo status."
+        caption="Review the sandbox summary before generating a local status. This is not sent to a lender."
       />
       <Card accent="primary">
         <DetailRow label="Applicant" value={draft.applicantName} />
@@ -483,6 +486,12 @@ function StepSubmit({
         <DetailRow label="Total repayment" value={formatCurrency(totalRepayment)} />
         <DetailRow label="Readiness" value={readinessLevel} />
       </Card>
+      <ExternalLinkCard
+        title="Learn with CreditCrest AI"
+        description="Understand APR, payment burden, and credit concepts before submitting the simulated review."
+        url={creditCrestLinks.lendingLab}
+        icon="school-outline"
+      />
       <ActionButton
         label="Submit simulated application"
         icon="send-check-outline"

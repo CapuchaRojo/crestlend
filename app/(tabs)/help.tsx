@@ -1,8 +1,9 @@
 import { router } from 'expo-router';
 import { Linking, StyleSheet, Text } from 'react-native';
 
+import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import { ActionButton, AppScreen, Badge, Card, ExternalLinkCard, SectionHeader } from '@/src/components/ui';
-import { creditCrestLinks, helpTopics } from '@/src/data/demoData';
+import { creditCrestLinks, helpTopics, productRelationship } from '@/src/data/demoData';
 import { colors } from '@/src/constants/theme';
 
 export default function HelpScreen() {
@@ -10,22 +11,28 @@ export default function HelpScreen() {
     <AppScreen
       eyebrow="Help and Learn"
       title="Understand before you borrow."
-      subtitle="CrestLend handles simulated application flows. CreditCrest AI handles education, calculators, and methodology."
+      subtitle="Move between lending workflow management and financial education without blurring the two."
       rightSlot={<Badge label="Education links" variant="info" />}
     >
       <Card accent="primary">
-        <Text style={styles.familyTitle}>Product family</Text>
+        <Text style={styles.familyTitle}>Product family relationship</Text>
         <Text style={styles.familyCopy}>
-          CrestLend is application-first. CreditCrest AI is education-first. Help links open
-          CreditCrest AI so lending decisions remain grounded in clear, directional learning.
+          {productRelationship.crestlend} {productRelationship.creditCrest}
         </Text>
         <ActionButton
-          label="Open CreditCrest AI"
+          label="Learn with CreditCrest AI"
           icon="open-in-new"
           onPress={() => Linking.openURL(creditCrestLinks.home)}
           variant="secondary"
         />
       </Card>
+
+      <ExternalLinkCard
+        title="Learn with CreditCrest AI"
+        description="Open the education companion before reviewing lending concepts or tradeoffs."
+        url={creditCrestLinks.lendingLab}
+        icon="school-outline"
+      />
 
       <SectionHeader title="CreditCrest AI guides" caption="Each item opens a public education page." />
       {helpTopics.map((topic) => (
@@ -57,6 +64,7 @@ export default function HelpScreen() {
           onPress={() => router.push('/disclosures')}
         />
       </Card>
+      <PartnerReadinessCard />
     </AppScreen>
   );
 }

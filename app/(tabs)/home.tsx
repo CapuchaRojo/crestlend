@@ -2,8 +2,9 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { router } from 'expo-router';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 
+import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import { ActionButton, AppScreen, Badge, Card, ExternalLinkCard, MetricTile, SectionHeader } from '@/src/components/ui';
-import { creditCrestLinks, exampleApplication, mayaProfile } from '@/src/data/demoData';
+import { creditCrestLinks, exampleApplication, mayaProfile, productRelationship } from '@/src/data/demoData';
 import { colors, radii, spacing } from '@/src/constants/theme';
 import { formatCurrency } from '@/src/lib/formatters';
 
@@ -12,9 +13,16 @@ export default function HomeScreen() {
     <AppScreen
       eyebrow="CrestLend"
       title="Borrow with clarity."
-      subtitle="A simulated lending app for comparing synthetic products, estimating payments, and learning before applying."
+      subtitle="Compare and manage lending journeys in a sandbox built for future partner workflows."
       rightSlot={<Badge label="Demo Mode" variant="demo" />}
     >
+      <Card accent="blue">
+        <Text style={styles.relationshipTitle}>CrestLend + CreditCrest AI</Text>
+        <Text style={styles.relationshipCopy}>
+          {productRelationship.crestlend} {productRelationship.creditCrest}
+        </Text>
+      </Card>
+
       <Card accent="primary">
         <View style={styles.profileTop}>
           <View style={styles.avatar}>
@@ -99,6 +107,7 @@ export default function HomeScreen() {
         url={creditCrestLinks.lendingLab}
         icon="lightbulb-on-outline"
       />
+      <PartnerReadinessCard />
     </AppScreen>
   );
 }
@@ -108,6 +117,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
+  },
+  relationshipTitle: {
+    color: colors.ink,
+    fontSize: 17,
+    lineHeight: 23,
+    fontWeight: '900',
+  },
+  relationshipCopy: {
+    color: colors.muted,
+    fontSize: 14,
+    lineHeight: 21,
   },
   avatar: {
     width: 48,

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { ComparisonPanel } from '@/src/components/ComparisonPanel';
 import { LoanCard } from '@/src/components/LoanCard';
+import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import { AppScreen, Badge, Card, SectionHeader } from '@/src/components/ui';
 import { loanOffers, mayaProfile } from '@/src/data/demoData';
 import { colors, spacing } from '@/src/constants/theme';
@@ -41,19 +42,21 @@ export default function LoanMarketplaceScreen() {
   return (
     <AppScreen
       eyebrow="Loan Marketplace"
-      title="Synthetic loans, real clarity."
-      subtitle="Browse demo-only products, compare estimated payments, and start a simulated application when ready."
+      title="Compare lending paths."
+      subtitle="Evaluate synthetic products with production-style payment, burden, and readiness signals."
       rightSlot={<Badge label="Synthetic offers" variant="demo" />}
     >
       <Card accent="amber">
         <Text style={styles.disclosureTitle}>Marketplace disclosure</Text>
         <Text style={styles.disclosureText}>
           These are not real lender offers. CrestLend does not guarantee approval, deny users, or
-          match borrowers with lenders in this sandbox.
+          match borrowers with lenders in this sandbox. Future live offers would require licensed
+          lender partners and jurisdiction-specific compliance review.
         </Text>
       </Card>
 
       <ComparisonPanel results={comparisonResults} />
+      <PartnerReadinessCard />
 
       <SectionHeader
         title="Browse offers"

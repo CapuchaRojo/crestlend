@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import { StyleSheet, Text } from 'react-native';
 
+import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import { ActionButton, AppScreen, Badge, Card, ExternalLinkCard, SectionHeader } from '@/src/components/ui';
 import { creditCrestLinks, disclosureItems } from '@/src/data/demoData';
 import { colors } from '@/src/constants/theme';
@@ -9,8 +10,8 @@ export default function DisclosuresScreen() {
   return (
     <AppScreen
       eyebrow="Compliance"
-      title="Demo disclosures"
-      subtitle="CrestLend is a sandbox lending experience. It is not a lender, broker, underwriter, or loan servicer."
+      title="Sandbox disclosures"
+      subtitle="CrestLend is production-oriented, but this build is not a lender, broker, underwriter, or loan servicer."
       rightSlot={<Badge label="Required reading" variant="warning" />}
     >
       <ActionButton label="Back" icon="arrow-left" variant="ghost" onPress={() => router.back()} />
@@ -27,10 +28,14 @@ export default function DisclosuresScreen() {
         <Text style={styles.title}>Production readiness boundary</Text>
         <Text style={styles.body}>
           Before any real lending use, CrestLend would need licensing review, partner compliance,
-          APR and adverse-action workflows, privacy policy, consent management, secure document
-          handling, audit logging, monitoring, and a security program.
+          lender API contracts, identity verification, secure document upload, open banking, credit
+          bureau soft-pull permissioning, payment processor controls, APR and adverse-action
+          workflows, privacy policy, consent management, audit logging, monitoring, and a security
+          program.
         </Text>
       </Card>
+
+      <PartnerReadinessCard />
 
       <ExternalLinkCard
         title="CreditCrest AI methodology"

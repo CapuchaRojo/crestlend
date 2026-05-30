@@ -23,7 +23,7 @@ export function DocumentChecklist({ requirements }: { requirements: DocumentRequ
               <Badge label="Locked demo" variant="neutral" />
             </View>
             <Text style={styles.description}>{requirement.description}</Text>
-            <Text style={styles.lockedText}>Document upload disabled in demo mode.</Text>
+            <Text style={styles.lockedText}>Future secure upload is inactive in sandbox mode.</Text>
           </View>
         </Card>
       ))}

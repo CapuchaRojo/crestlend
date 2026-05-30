@@ -24,7 +24,7 @@ export function ComparisonPanel({ results }: { results: LoanComparisonResult[] }
       <View style={styles.wrap}>
         <SectionHeader
           title="Loan comparison"
-          caption="Select two or three synthetic offers to compare payments, cost, burden, and readiness."
+          caption="Select two or three synthetic offers to compare cost, burden, readiness, and journey fit."
         />
         <EmptyState
           icon="compare-horizontal"
@@ -39,7 +39,13 @@ export function ComparisonPanel({ results }: { results: LoanComparisonResult[] }
     <View style={styles.wrap}>
       <SectionHeader
         title="Loan comparison"
-        caption="Directional results only. No real offer, approval, denial, or official score prediction."
+        caption="Production-style comparison, sandbox-only data. No real offer, approval, denial, or official score prediction."
+      />
+      <ExternalLinkCard
+        title="Learn with CreditCrest AI"
+        description="Review APR, total repayment, and payment burden concepts before comparing offers."
+        url={creditCrestLinks.calculatorHub}
+        icon="school-outline"
       />
       {results.map((result) => (
         <Card key={result.offerId} accent={result.readiness.directionalRisk === 'Significant risk' ? 'coral' : 'primary'}>
@@ -78,8 +84,8 @@ export function ComparisonPanel({ results }: { results: LoanComparisonResult[] }
         </Card>
       ))}
       <ExternalLinkCard
-        title="Learn what this means"
-        description="Open CreditCrest AI Calculator Hub for payment and APR education."
+        title="Open CreditCrest AI Calculator Hub"
+        description="Use the education companion to understand the financial concepts behind these results."
         url={creditCrestLinks.calculatorHub}
         icon="calculator-variant-outline"
       />

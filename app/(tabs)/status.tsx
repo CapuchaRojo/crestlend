@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { DocumentChecklist } from '@/src/components/DocumentChecklist';
+import { PartnerReadinessCard } from '@/src/components/PartnerReadinessCard';
 import { StatusTimeline } from '@/src/components/StatusTimeline';
 import { AppScreen, Badge, Card, DetailRow, ExternalLinkCard, SectionHeader } from '@/src/components/ui';
 import {
@@ -20,8 +21,8 @@ export default function StatusScreen() {
   return (
     <AppScreen
       eyebrow="Application Status"
-      title="Track the sandbox flow."
-      subtitle="One example simulated application shows how a future lender-ready status tracker could behave."
+      title="Manage the lending journey."
+      subtitle="A simulated tracker shows how future lender-ready milestones could be organized."
       rightSlot={<Badge label="Simulated" variant="demo" />}
     >
       <Card accent="blue">
@@ -54,8 +55,10 @@ export default function StatusScreen() {
       />
       <DocumentChecklist requirements={documentRequirements} />
 
+      <PartnerReadinessCard />
+
       <ExternalLinkCard
-        title="Learn payment impact in CreditCrest AI"
+        title="Learn with CreditCrest AI"
         description="Review loan and credit concepts before comparing products."
         url={creditCrestLinks.lendingLab}
         icon="school-outline"

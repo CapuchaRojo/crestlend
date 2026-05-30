@@ -2,10 +2,10 @@
 
 **Tagline:** Borrow with clarity.
 
-CrestLend is a standalone Expo React Native mobile app for a simulated lending experience. It belongs to the CreditCrest product family, but it is separate from CreditCrest AI:
+CrestLend is a standalone Expo React Native mobile app for a production-oriented sandbox lending experience. It belongs to the CreditCrest product family, but it is separate from CreditCrest AI:
 
-- **CrestLend:** application-first lending app experience.
-- **CreditCrest AI:** education, calculators, simulation, and methodology.
+- **CrestLend:** helps users compare, organize, and manage lending journeys in a sandbox environment.
+- **CreditCrest AI:** helps users understand the financial concepts behind those lending decisions through education, calculators, simulation, and methodology.
 
 CreditCrest AI links used throughout the app:
 
@@ -16,15 +16,15 @@ CreditCrest AI links used throughout the app:
 
 ## Problem
 
-Borrowers often need to understand monthly payment, APR, repayment burden, documents, and application status before they are ready to interact with real lenders. Product teams also need a safe sandbox for testing lending UX without collecting sensitive data or implying real approval.
+Borrowers often need to understand monthly payment, APR, repayment burden, documents, and application status before they are ready to interact with real lenders. Product teams also need a serious sandbox for testing production-style lending UX without collecting sensitive data, implying real approval, or activating regulated workflows.
 
 ## Solution
 
-CrestLend provides a polished Android-first mobile demo where users can browse synthetic loans, compare offers, estimate repayment, walk through a simulated application, review document requirements, track status, and jump to CreditCrest AI for education.
+CrestLend provides a polished Android-first mobile sandbox where users can browse synthetic loans, compare offers, estimate repayment, walk through a simulated application, review document requirements, track status, and jump to CreditCrest AI for financial education. The app is structured for future partner integration while keeping all live lending features inactive.
 
 ## Features
 
-- Mobile-first onboarding with clear Demo Mode disclosure
+- Mobile-first onboarding with clear sandbox disclosure
 - Home dashboard for synthetic borrower Maya
 - Synthetic loan marketplace
 - 2-3 offer comparison with principal, APR, term, monthly payment, total repayment, total interest, payment burden, funding speed, readiness, pros, and cons
@@ -32,8 +32,9 @@ CrestLend provides a polished Android-first mobile demo where users can browse s
 - Locked document checklist with upload-disabled messaging
 - Application status timeline
 - Repayment schedule with due dates, principal, interest, remaining balance, early payoff note, and missed payment warning
-- Help screen linking to CreditCrest AI education pages
+- Prominent CreditCrest AI education links in Help, loan comparison, application review, and repayment schedule
 - Compliance/disclosure screen
+- Future partner-ready capability surfaces for lender APIs, identity verification, secure document upload, open banking, bureau soft pulls, and payment processing
 - Deterministic local lending engine in `src/lib/lendingEngine.ts`
 - Unit tests for core calculations and status logic
 
@@ -64,9 +65,9 @@ Android-first commands:
 npm run android
 ```
 
-## Demo Mode Explanation
+## Sandbox Mode Explanation
 
-CrestLend is a sandbox app. All profiles, offers, APRs, status events, document requirements, and repayment schedules are synthetic. The app uses local mock data and local state only.
+CrestLend is a sandbox app with production-oriented UX. All profiles, offers, APRs, status events, document requirements, and repayment schedules are synthetic. The app uses local mock data and local state only.
 
 Maya is the preserved demo borrower:
 
@@ -92,7 +93,7 @@ CrestLend does **not**:
 - Predict official credit score changes
 - Match borrowers with real lenders
 
-All application screens say Demo Mode or Simulated Application.
+All application screens say Demo Mode, Sandbox, or Simulated Application.
 
 ## Future Production Roadmap
 
@@ -112,6 +113,21 @@ Future production work would require:
 
 ## Google Play Readiness Notes
 
-CrestLend is configured as an Expo Android-first app with package name `com.creditcrest.crestlend`. Before any Google Play release, the app would still need production-grade app icons, privacy disclosures, data safety form review, content policy review, accessibility QA, security testing, and compliance review for any real financial-services functionality.
+CrestLend is configured as an Expo Android-first app with package name `com.creditcrest.crestlend`. Before any Google Play release, the app would still need production-grade app icons, accessibility QA, security testing, and compliance review for any financial-services functionality.
+
+Google Play readiness checklist:
+
+- Privacy policy required before release.
+- Data safety form required in Play Console, even for apps that do not collect user data.
+- Financial features declaration required for apps published on Google Play, including testing tracks.
+- Personal-loan policy review required before any real personal-loan feature, offer, lead generation, repayment, or partner handoff.
+- No real loan claims, lender matching, approvals, denials, funding, servicing, or repayment processing until CrestLend is appropriately licensed, partnered, reviewed, and approved for the target market.
+- Store listing and in-app copy must continue to match actual data collection and sharing behavior.
+
+Policy references:
+
+- Google Play Data safety: https://support.google.com/googleplay/android-developer/answer/10787469
+- Google Play Financial Services: https://support.google.com/googleplay/android-developer/answer/16322411
+- Google Play Financial features declaration: https://support.google.com/googleplay/android-developer/answer/13849271
 
 For the current demo, no paid APIs or lender integrations are required.
