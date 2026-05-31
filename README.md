@@ -60,6 +60,8 @@ CrestLend provides a polished Android-first mobile sandbox where users can brows
 - [Mobile QA](docs/MOBILE_QA.md)
 - [Security Review](docs/SECURITY_REVIEW.md)
 - [EAS Android Internal Build](docs/EAS_ANDROID_INTERNAL_BUILD.md)
+- [CreditCrest Ecosystem Brand Kit](docs/CREDITCREST_ECOSYSTEM_BRAND_KIT.md)
+- [Supabase/Auth Architecture Proposal](docs/SUPABASE_AUTH_ARCHITECTURE_PROPOSAL.md)
 
 ## Android Internal Build
 
