@@ -51,6 +51,15 @@ CrestLend provides a polished Android-first mobile sandbox where users can brows
 - Jest with `jest-expo`
 - ESLint with `eslint-config-expo`
 
+## Production Readiness Docs
+
+- [Privacy Policy Draft](docs/PRIVACY_POLICY_DRAFT.md)
+- [Disclaimer](docs/DISCLAIMER.md)
+- [Release Checklist](docs/RELEASE_CHECKLIST.md)
+- [Accessibility QA](docs/ACCESSIBILITY_QA.md)
+- [Mobile QA](docs/MOBILE_QA.md)
+- [Security Review](docs/SECURITY_REVIEW.md)
+
 ## How To Run Locally
 
 ```sh
