@@ -59,6 +59,19 @@ CrestLend provides a polished Android-first mobile sandbox where users can brows
 - [Accessibility QA](docs/ACCESSIBILITY_QA.md)
 - [Mobile QA](docs/MOBILE_QA.md)
 - [Security Review](docs/SECURITY_REVIEW.md)
+- [EAS Android Internal Build](docs/EAS_ANDROID_INTERNAL_BUILD.md)
+
+## Android Internal Build
+
+CrestLend includes EAS configuration for Android internal distribution builds. This is for sandbox testing only, not Google Play production release, real lending, lender matching, bank connections, credit bureau connections, uploads, auth, or real applications.
+
+Run the preview build later with:
+
+```sh
+npm run eas:android:preview
+```
+
+See [EAS Android Internal Build](docs/EAS_ANDROID_INTERNAL_BUILD.md) for setup, login, build, install, and troubleshooting steps.
 
 ## How To Run Locally
 

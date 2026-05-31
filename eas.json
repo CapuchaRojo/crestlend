@@ -1,0 +1,38 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "local"
+  },
+  "build": {
+    "development": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "CRESTLEND_BUILD_PROFILE": "development-internal",
+        "CRESTLEND_RELEASE_MODE": "sandbox-only"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "CRESTLEND_BUILD_PROFILE": "preview-internal",
+        "CRESTLEND_RELEASE_MODE": "sandbox-only"
+      }
+    },
+    "production": {
+      "distribution": "store",
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "env": {
+        "CRESTLEND_BUILD_PROFILE": "production-not-ready",
+        "CRESTLEND_RELEASE_MODE": "not-ready-for-play-store"
+      }
+    }
+  }
+}

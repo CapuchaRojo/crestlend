@@ -2,7 +2,7 @@
   "expo": {
     "name": "CrestLend",
     "slug": "crestlend",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "crestlend",
@@ -17,6 +17,7 @@
     },
     "android": {
       "package": "com.creditcrest.crestlend",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#DDF5EF",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
